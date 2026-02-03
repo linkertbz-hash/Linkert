@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Акт приёма‑передачи автомобиля — АвтоПерегон PRO</title>
+  <style>
+    :root{
+      --text:#111;
+      --muted:#666;
+      --border:#e6e6e6;
+      --bg:#fff;
+      --chip:#f6f7f8;
+      --accent:#0a66ff;
+    }
+    *{box-sizing:border-box}
+    body{margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; color:var(--text); background:#f3f4f6}
+    .wrap{max-width:980px; margin:0 auto; padding:18px}
+    .topbar{display:flex; gap:12px; align-items:flex-start; justify-content:space-between; margin-bottom:12px}
+    h1{font-size:20px; margin:0}
+    h2{font-size:16px; margin:14px 0 8px}
+    h3{font-size:14px; margin:12px 0 8px}
+    .muted{color:var(--muted); font-size:12px; line-height:1.4}
+    .badge{font-size:12px; font-weight:700; padding:6px 10px; border:1px solid var(--border); border-radius:999px; background:var(--bg)}
+    .box{background:var(--bg); border:1px solid var(--border); border-radius:14px; padding:14px}
+    .grid{display:grid; grid-template-columns: 1fr 1fr; gap:10px}
+    .field label{display:block; font-size:12px; color:var(--muted); margin-bottom:6px}
+    input, textarea{
+      width:100%;
+      border:1px solid var(--border);
+      border-radius:10px;
+      padding:10px 12px;
+      font:inherit;
+      background:#fff;
+      outline:none;
+    }
+    textarea{min-height:72px; resize:vertical}
+    .row{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
+    .btn{
+      appearance:none; border:1px solid var(--border);
+      background:var(--chip);
+      padding:10px 12px;
+      border-radius:10px;
+      cursor:pointer;
+      font-weight:700;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      text-decoration:none;
+      color:inherit;
+    }
+    .btn.primary{background:var(--accent); border-color:var(--accent); color:#fff}
+    .doc{background:var(--bg); border:1px solid var(--border); border-radius:14px; padding:18px; margin-top:12px}
+    .fill{border-bottom:1px dotted #999; padding:0 2px}
+    .empty{color:#b91c1c}
+    table{width:100%; border-collapse:collapse; margin:10px 0}
+    td,th{border:1px solid var(--border); padding:10px; vertical-align:top}
+    th{background:#fafafa; text-align:left}
+    ul{margin:6px 0 0 16px}
+    .no-print{display:block}
+
+    @media print{
+      body{background:#fff}
+      .wrap{padding:0}
+      .no-print{display:none !important}
+      .box, .doc{border:none; border-radius:0}
+      .badge{border:none; padding:0}
+      a{color:inherit; text-decoration:none}
+    }
+  </style>
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)}
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=106551140', 'ym');
+
+    ym(106551140, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<!-- /Yandex.Metrika counter -->
+</head>
+<body>
+<noscript><div><img src="https://mc.yandex.ru/watch/106551140" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+
+  <div class="wrap">
+    <div class="topbar">
+      <div>
+        <h1>АКТ приёма‑передачи автомобиля</h1>
+        <div class="muted">Приложение к договору № <span class="fill" data-fill="contract_no"></span> от <span class="fill" data-fill="place_date"></span>. Рекомендуется сделать фото/видео фиксацию состояния авто.</div>
+      </div>
+      <div class="badge">Версия: 31.01.2026</div>
+    </div>
+
+    <div class="box no-print" id="fillBox">
+      <h2 style="margin-top:0">Заполнение акта</h2>
+      <p class="muted" style="margin-top:0">Если вы уже заполнили договор, данные подтянутся автоматически. При необходимости заполните вручную и нажмите «Сформировать».</p>
+
+      <div class="grid">
+        <div class="field">
+          <label>Номер договора</label>
+          <input id="contract_no" placeholder="Например: 001"/>
+        </div>
+        <div class="field">
+          <label>Дата договора (город, дата)</label>
+          <input id="place_date" placeholder="Например: Брянск, 31.01.2026"/>
+        </div>
+
+        <div class="field">
+          <label>Заказчик — ФИО</label>
+          <input id="customer_fio" placeholder="Фамилия Имя Отчество"/>
+        </div>
+        <div class="field">
+          <label>Заказчик — телефон</label>
+          <input id="customer_phone" placeholder="+7 999 000-00-00"/>
+        </div>
+
+        <div class="field">
+          <label>Автомобиль — марка/модель</label>
+          <input id="car_model" placeholder="Например: Toyota Camry"/>
+        </div>
+        <div class="field">
+          <label>VIN</label>
+          <input id="car_vin" placeholder="VIN"/>
+        </div>
+
+        <div class="field">
+          <label>Гос. номер</label>
+          <input id="car_plate" placeholder="А000АА 32"/>
+        </div>
+        <div class="field">
+          <label>Маршрут (необязательно)</label>
+          <input id="route" placeholder="Например: Брянск → Москва"/>
+        </div>
+      </div>
+
+      <hr style="border:none;border-top:1px solid var(--border); margin:14px 0"/>
+
+      <h3 style="margin-top:0">Параметры передачи/возврата</h3>
+      <div class="grid">
+        <div class="field">
+          <label>Передача Исполнителю — дата/время</label>
+          <input id="give_dt" placeholder="Например: 31.01.2026 10:00"/>
+        </div>
+        <div class="field">
+          <label>Возврат Заказчику — дата/время</label>
+          <input id="return_dt" placeholder="Например: 01.02.2026 18:30"/>
+        </div>
+
+        <div class="field">
+          <label>Передача — место</label>
+          <input id="give_place" placeholder="Город/адрес"/>
+        </div>
+        <div class="field">
+          <label>Возврат — место</label>
+          <input id="return_place" placeholder="Город/адрес"/>
+        </div>
+
+        <div class="field">
+          <label>Передача — пробег (км)</label>
+          <input id="give_odo" placeholder="_____"/>
+        </div>
+        <div class="field">
+          <label>Возврат — пробег (км)</label>
+          <input id="return_odo" placeholder="_____"/>
+        </div>
+
+        <div class="field">
+          <label>Передача — топливо</label>
+          <input id="give_fuel" placeholder="Например: 1/2 бака"/>
+        </div>
+        <div class="field">
+          <label>Возврат — топливо</label>
+          <input id="return_fuel" placeholder="Например: 1/4 бака"/>
+        </div>
+
+        <div class="field" style="grid-column:1 / -1;">
+          <label>Состояние/повреждения/замечания (если нет — «без замечаний»)</label>
+          <textarea id="notes" placeholder="Например: скол на лобовом; царапина заднего бампера справа; в салоне чисто."></textarea>
+        </div>
+
+        <div class="field" style="grid-column:1 / -1;">
+          <label>Комплектация/передано (ключи, документы, аптечка и т.д.)</label>
+          <textarea id="set" placeholder="Например: 2 ключа; СТС; полис ОСАГО; знак аварийной остановки; домкрат; баллонный ключ."></textarea>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top:12px">
+        <button class="btn primary" id="applyBtn" type="button">Сформировать</button>
+        <button class="btn" id="printBtn" type="button">Печать</button>
+        <a class="btn" href="dogovor-primer.html">← к договору</a>
+      </div>
+    </div>
+
+    <div class="doc" id="doc">
+      <h2 style="margin-top:0">1. Стороны</h2>
+      <p>
+        <b>Заказчик:</b> <span class="fill" data-fill="customer_fio"></span>, тел. <span class="fill" data-fill="customer_phone"></span><br/>
+        <b>Исполнитель (самозанятый НПД):</b> <span class="fill" data-fill="exec_fio"></span>, ИНН <span class="fill" data-fill="exec_inn"></span>, <span class="fill" data-fill="exec_addr"></span>, тел. <span class="fill" data-fill="exec_phone"></span>
+      </p>
+
+      <h2>2. Автомобиль</h2>
+      <p>
+        <b>Марка/модель:</b> <span class="fill" data-fill="car_model"></span><br/>
+        <b>VIN:</b> <span class="fill" data-fill="car_vin"></span><br/>
+        <b>Гос. номер:</b> <span class="fill" data-fill="car_plate"></span><br/>
+        <b>Маршрут (если указан):</b> <span class="fill" data-fill="route"></span>
+      </p>
+
+      <h2>3. Передача и возврат</h2>
+      <table>
+        <tr>
+          <th style="width:50%">Передача Исполнителю</th>
+          <th>Возврат Заказчику</th>
+        </tr>
+        <tr>
+          <td>
+            <div><b>Дата/время:</b> <span class="fill" data-fill="give_dt"></span></div>
+            <div><b>Место:</b> <span class="fill" data-fill="give_place"></span></div>
+            <div><b>Пробег:</b> <span class="fill" data-fill="give_odo"></span></div>
+            <div><b>Топливо:</b> <span class="fill" data-fill="give_fuel"></span></div>
+          </td>
+          <td>
+            <div><b>Дата/время:</b> <span class="fill" data-fill="return_dt"></span></div>
+            <div><b>Место:</b> <span class="fill" data-fill="return_place"></span></div>
+            <div><b>Пробег:</b> <span class="fill" data-fill="return_odo"></span></div>
+            <div><b>Топливо:</b> <span class="fill" data-fill="return_fuel"></span></div>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <b>Состояние/повреждения/замечания:</b><br/>
+            <span class="fill" data-fill="notes"></span>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <b>Комплектация/передано:</b><br/>
+            <span class="fill" data-fill="set"></span>
+          </td>
+        </tr>
+      </table>
+
+      <h2>4. Подписи</h2>
+      <table>
+        <tr>
+          <th style="width:50%">Заказчик</th>
+          <th>Исполнитель</th>
+        </tr>
+        <tr>
+          <td>
+            <div><b>ФИО:</b> <span class="fill" data-fill="customer_fio"></span></div>
+            <div style="margin-top:10px"><b>Подпись:</b> ___________________/________________</div>
+          </td>
+          <td>
+            <div><b>ФИО:</b> <span class="fill" data-fill="exec_fio"></span></div>
+            <div style="margin-top:10px"><b>Подпись:</b> ___________________/________________</div>
+          </td>
+        </tr>
+      </table>
+
+      <p class="muted">Примечание: при спорных ситуациях рекомендуется приложить фото/видео фиксацию и переписку по заказу.</p>
+    </div>
+  </div>
+
+  <script>
+    // Данные Исполнителя — фиксируются один раз
+    const EXECUTOR = {
+      fio: 'Прошин Андрей Максимович',
+      inn: '324302996996',
+      addr: 'Брянская область, г. Брянск',
+      phone: '+7-995-020-20-19',
+      email: 'linkert.bz@yandex.ru',
+      pay: 'СБП (по номеру телефона) / наличными'
+    };
+
+    const DEFAULTS = {
+      contract_no: '___',
+      place_date: '______________________________',
+      customer_fio: '______________________________',
+      customer_phone: '________________',
+      car_model: '________________',
+      car_vin: '________________',
+      car_plate: '________________',
+      route: '—',
+      give_dt: '______________________________',
+      give_place: '______________________________',
+      give_odo: '________________ км',
+      give_fuel: '________________',
+      return_dt: '______________________________',
+      return_place: '______________________________',
+      return_odo: '________________ км',
+      return_fuel: '________________',
+      notes: 'без замечаний',
+      set: '______________________________'
+    };
+
+    const state = { ...DEFAULTS };
+
+    function val(id){
+      const el = document.getElementById(id);
+      return el ? (el.value || '').trim() : '';
+    }
+
+    function apply(){
+      state.exec_fio = EXECUTOR.fio || DEFAULTS.exec_fio;
+      state.exec_inn = EXECUTOR.inn || DEFAULTS.exec_inn;
+      state.exec_addr = EXECUTOR.addr || DEFAULTS.exec_addr;
+      state.exec_phone = EXECUTOR.phone || DEFAULTS.exec_phone;
+
+      state.contract_no = val('contract_no') || DEFAULTS.contract_no;
+      state.place_date = val('place_date') || DEFAULTS.place_date;
+
+      state.customer_fio = val('customer_fio') || DEFAULTS.customer_fio;
+      state.customer_phone = val('customer_phone') || DEFAULTS.customer_phone;
+
+      state.car_model = val('car_model') || DEFAULTS.car_model;
+      state.car_vin = val('car_vin') || DEFAULTS.car_vin;
+      state.car_plate = val('car_plate') || DEFAULTS.car_plate;
+
+      state.route = val('route') || DEFAULTS.route;
+
+      state.give_dt = val('give_dt') || DEFAULTS.give_dt;
+      state.give_place = val('give_place') || DEFAULTS.give_place;
+      state.give_odo = val('give_odo') || DEFAULTS.give_odo;
+      state.give_fuel = val('give_fuel') || DEFAULTS.give_fuel;
+
+      state.return_dt = val('return_dt') || DEFAULTS.return_dt;
+      state.return_place = val('return_place') || DEFAULTS.return_place;
+      state.return_odo = val('return_odo') || DEFAULTS.return_odo;
+      state.return_fuel = val('return_fuel') || DEFAULTS.return_fuel;
+
+      state.notes = val('notes') || DEFAULTS.notes;
+      state.set = val('set') || DEFAULTS.set;
+
+      document.querySelectorAll('[data-fill]').forEach(el=>{
+        const key = el.getAttribute('data-fill');
+        const v = (state[key] ?? DEFAULTS[key] ?? '');
+        el.textContent = v;
+        const isEmpty = (v === '' || v === '—' || v === '___' || v === '________________' || v.includes('_____') || v.includes('____'));
+        el.classList.toggle('empty', isEmpty);
+      });
+
+      // сохраняем (если открыли из договора — подхватим здесь)
+      try{ localStorage.setItem('peregon_act_state', JSON.stringify(state)); }catch(e){}
+    }
+
+    function loadFromContract(){
+      // 1) пробуем подтянуть из договора (последняя версия)
+      try{
+        const raw = localStorage.getItem('peregon_contract_state');
+        if(!raw) return;
+        const c = JSON.parse(raw);
+
+        const map = {
+          contract_no: 'contract_no',
+          place_date: 'place_date',
+          customer_fio: 'customer_fio',
+          customer_phone: 'customer_phone',
+          car_model: 'car_model',
+          car_vin: 'car_vin',
+          car_plate: 'car_plate'
+        };
+
+        Object.keys(map).forEach(k=>{
+          const id = map[k];
+          const el = document.getElementById(id);
+          if(el && (el.value || '').trim() === '' && c[k]){
+            el.value = c[k];
+          }
+        });
+
+        // route as a single line
+        const routeEl = document.getElementById('route');
+        if(routeEl && (routeEl.value || '').trim() === ''){
+          const from = (c.route_from || '').toString().trim();
+          const to = (c.route_to || '').toString().trim();
+          if(from || to) routeEl.value = (from && to) ? `${from} → ${to}` : (from || to);
+        }
+      }catch(e){}
+    }
+
+    function init(){
+      // автоподтяжка из договора
+      loadFromContract();
+
+      // удобный дефолт даты договора: сегодня
+      const now = new Date();
+      const dd = String(now.getDate()).padStart(2,'0');
+      const mm = String(now.getMonth()+1).padStart(2,'0');
+      const yyyy = now.getFullYear();
+      const dateStr = `${dd}.${mm}.${yyyy}`;
+
+      const place = EXECUTOR.addr ? EXECUTOR.addr : 'Брянск';
+      const placeShort = (place || 'Брянск').split(',')[0];
+
+      const placeDateInput = document.getElementById('place_date');
+      if(placeDateInput && !placeDateInput.value){
+        placeDateInput.value = `${placeShort}, ${dateStr}`;
+      }
+
+      apply();
+
+      const applyBtn = document.getElementById('applyBtn');
+      const printBtn = document.getElementById('printBtn');
+
+      if(applyBtn) applyBtn.addEventListener('click', apply);
+      if(printBtn) printBtn.addEventListener('click', ()=>{ apply(); window.print(); });
+
+      document.querySelectorAll('#fillBox input, #fillBox textarea').forEach(el=>{
+        el.addEventListener('input', ()=>{ apply(); });
+      });
+    }
+
+    init();
+  </script>
+
+<!-- Metrika goals (reachGoal) -->
+<script>
+(function () {
+  function reach(goal, params) {
+    try {
+      if (typeof ym === 'function') ym(106551140, 'reachGoal', goal, params || {});
+    } catch (e) {}
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    // Forms
+    ['leadForm','peregonCalc','loginForm','regForm'].forEach(function (id) {
+      var f = document.getElementById(id);
+      if (!f) return;
+      f.addEventListener('submit', function () { reach('form_submit_' + id); }, true);
+    });
+
+    // Clicks
+    document.querySelectorAll('a[href^="tel:"]').forEach(function (a) {
+      a.addEventListener('click', function () { reach('click_tel'); }, true);
+    });
+
+    document.querySelectorAll('a[href^="mailto:"]').forEach(function (a) {
+      a.addEventListener('click', function () { reach('click_email'); }, true);
+    });
+
+    document.querySelectorAll('a[href*="vk.ru"]').forEach(function (a) {
+      a.addEventListener('click', function () { reach('click_vk'); }, true);
+    });
+
+    document.querySelectorAll('[data-contact="tg"], #tgContactsBtn').forEach(function (a) {
+      a.addEventListener('click', function () { reach('click_tg'); }, true);
+    });
+
+    document.querySelectorAll('[data-contact="max"]').forEach(function (a) {
+      a.addEventListener('click', function () { reach('click_max'); }, true);
+    });
+  });
+})();
+</script>
+<!-- /Metrika goals (reachGoal) -->
+</body>
+</html>

@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+Disallow: /admin.html
+Disallow: /cabinet.html
+Disallow: /login.html
+Disallow: /register.html
+
+Sitemap: https://peregon-mobil.ru/sitemap.xml

@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Личный кабинет — заказы, статусы, оплата | АвтоПерегон PRO</title>
+  <meta name="description" content="Личный кабинет клиентов: история заявок, статусы, бронь 40%, документы, скидка по количеству выполненных заказов."/>
+  <meta name="theme-color" content="#0b1220"/>
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml"/>
+  <link rel="stylesheet" href="assets/css/styles.css"/>
+  <meta name="robots" content="noindex,nofollow"/>
+  <!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)}
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; } }
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=106551140', 'ym');
+
+    ym(106551140, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<!-- /Yandex.Metrika counter -->
+</head>
+<body>
+<noscript><div><img src="https://mc.yandex.ru/watch/106551140" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+
+
+<header class="header">
+  <div class="container">
+    <div class="nav">
+      <a class="brand" href="index.html">
+        <span class="logo" aria-hidden="true"></span>
+        <span class="name">АвтоПерегон PRO<small>Личный кабинет</small></span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" type="button" aria-label="Открыть меню" aria-expanded="false">☰</button>
+
+      <nav class="navlinks" id="navLinks" aria-label="Меню">
+        <a href="services.html" class="">Услуги</a>
+        <a href="sober-driver.html" class="">Трезвый водитель</a>
+        <a href="tariffs.html" class="">Тарифы</a>
+        <a href="routes/index.html" class="">Направления</a>
+        <a href="blog/index.html" class="">Блог</a>
+        <a href="faq.html" class="">FAQ</a>
+        <a href="reviews.html" class="">Отзывы</a>
+        <a href="contacts.html" class="">Контакты</a>
+      </nav>
+
+      <div class="nav-cta">
+        <a class="btn small ghost" href="tel:+79950202019">+7-995-020-20-19</a>
+        <a class="btn small primary" href="cabinet.html">Кабинет</a>
+        <a class="btn small success" href="#" data-contact="tg" onclick="return false;">Telegram</a>
+        <a class="btn small primary" href="index.html#calc">Калькулятор</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero hero--bg hero--subpage">
+    <div class="container">
+      <div class="hero-grid hero-grid--single">
+        <div class="hero-card">
+          <span class="badge">👤 Кабинет клиента</span>
+          <h1>Ваши заказы и статусы</h1>
+          <p class="note">Здесь хранится история заявок, статус каждого заказа, документы и подсказки по оплате (бронь 40%).</p>
+          <div class="kpi" style="margin-top:12px;">
+            <div class="k"><b id="cabEmail">—</b><small>email</small></div>
+            <div class="k"><b id="cabOrders">0</b><small>всего заявок</small></div>
+            <div class="k"><b id="cabDone">0</b><small>выполнено</small></div>
+            <div class="k"><b id="cabDiscount">0%</b><small>скидка</small></div>
+          </div>
+          <div class="hero-cta" style="margin-top:12px;">
+            <button class="btn primary wide" id="tabOrdersBtn" type="button">Мои заказы</button>
+            <button class="btn ghost wide" id="tabNewBtn" type="button">Новый заказ</button>
+          </div>
+          <div class="hero-cta" style="margin-top:10px;">
+            <button class="btn ghost wide" id="tabPayBtn" type="button">Оплата и бронь</button>
+            <button class="btn ghost wide" id="tabDocsBtn" type="button">Документы</button>
+            <button class="btn ghost wide" id="logoutBtn" type="button">Выйти</button>
+          </div>
+          <div class="note" id="cabNextTier" style="margin-top:10px;"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tight">
+    <div class="container">
+      <div class="grid">
+        <div class="card" id="panelOrders" style="grid-column:1/-1;">
+          <h2 style="margin-top:0;">Мои заказы</h2>
+          <p class="note">Нажмите на заказ, чтобы открыть детали и увидеть текущий статус.</p>
+          <div class="admin-toolbar" style="margin-top:10px;">
+            <input id="ordersSearch" type="search" placeholder="Поиск: Москва, Казань, телефон, статус…"/>
+            <button class="btn small ghost" id="ordersRefreshBtn" type="button">Обновить</button>
+          </div>
+          <div class="hr"></div>
+          <div class="grid" id="ordersList" style="grid-column:1/-1;"></div>
+        </div>
+
+        <div class="card" id="panelNew" style="grid-column:1/-1; display:none;">
+          <h2 style="margin-top:0;">Новый заказ</h2>
+          <p class="note">Можно оформить вручную или подтянуть «последний расчёт» из калькулятора.</p>
+
+          <div class="grid" style="grid-template-columns:1fr; gap:10px; margin-bottom:10px;">
+            <button class="btn ghost wide" id="importEstimateBtn" type="button">Подтянуть последний расчёт</button>
+          </div>
+
+          <form class="form" id="orderForm" autocomplete="on">
+            <div class="grid" style="grid-template-columns:1fr; gap:12px;">
+              <div class="field">
+                <label for="oFrom">Откуда</label>
+                <input id="oFrom" required placeholder="Например: Брянск"/>
+              </div>
+              <div class="field">
+                <label for="oTo">Куда</label>
+                <input id="oTo" required placeholder="Например: Москва"/>
+              </div>
+              <div class="field">
+                <label for="oCategory">Категория</label>
+                <select id="oCategory">
+                  <option value="B" selected>Категория B (легковой)</option>
+                  <option value="C">Категория C</option>
+                  <option value="D">Категория D</option>
+                  <option value="CE">Категория CE</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="oPhone">Телефон</label>
+                <input id="oPhone" inputmode="tel" placeholder="+7…" required/>
+              </div>
+              <div class="field">
+                <label for="oDate">Дата/время (необязательно)</label>
+                <input id="oDate" placeholder="Например: сегодня вечером, завтра 10:00"/>
+              </div>
+              <div class="field">
+                <label for="oComment">Комментарий (необязательно)</label>
+                <textarea id="oComment" rows="4" placeholder="Особенности авто, место передачи, пожелания по связи…"></textarea>
+              </div>
+
+              <div class="field">
+                <label class="pill" style="display:flex; gap:10px; align-items:center;">
+                  <input type="checkbox" id="oNight" style="width:auto; margin:0;"> Ночь (22:00–07:00)
+                </label>
+              </div>
+              <div class="field">
+                <label class="pill" style="display:flex; gap:10px; align-items:center;">
+                  <input type="checkbox" id="oUrgent" style="width:auto; margin:0;"> Срочно
+                </label>
+              </div>
+              <div class="field">
+                <label for="oWait">Ожидание (часов, если актуально)</label>
+                <input id="oWait" inputmode="decimal" placeholder="Например: 1"/>
+              </div>
+
+              <div class="card" id="estimateBox" style="display:none; grid-column:1/-1;">
+                <b>Оценка из калькулятора</b>
+                <p class="note" style="margin-top:6px;">Базовая цена: <b id="estBase">—</b></p>
+                <p class="note">Цена со скидкой: <b id="estWithDiscount">—</b></p>
+                <p class="note">Бронь 40%: <b id="estBooking">—</b></p>
+              </div>
+            </div>
+
+            <button class="btn primary wide" id="createOrderBtn" type="submit">Создать заказ</button>
+          </form>
+
+          <div class="hr"></div>
+          <p class="note">После создания заказа вы сможете оплатить бронь удобным способом: СБП, карта МИР, СберПэй, T‑Pay — мы отправим реквизиты/ссылку в Telegram или по телефону.</p>
+        </div>
+
+        <div class="card" id="panelPay" style="grid-column:1/-1; display:none;">
+          <h2 style="margin-top:0;">Оплата и бронь 40%</h2>
+          <p>Чтобы закрепить дату и водителя, используем бронь <b>40%</b>. Остаток — при передаче авто или по договорённости.</p>
+          <div class="bullets" style="margin-top:10px;">
+            <div class="bullet"><span class="dot"></span><div><b>СБП</b><span>самый быстрый вариант (QR/ссылка)</span></div></div>
+            <div class="bullet"><span class="dot"></span><div><b>Карта МИР</b><span>по реквизитам / по ссылке</span></div></div>
+            <div class="bullet"><span class="dot"></span><div><b>СберПэй</b><span>если удобнее через Сбер</span></div></div>
+            <div class="bullet"><span class="dot"></span><div><b>T‑Pay</b><span>если доступно — подключим</span></div></div>
+          </div>
+          <div class="hr"></div>
+          <p class="note">Важно: реальные реквизиты/ссылку на оплату мы отправляем только после подтверждения заказа.</p>
+          <a class="btn success wide" href="#" data-contact="tg" onclick="return false;">Написать в Telegram для оплаты</a>
+        </div>
+
+        <div class="card" id="panelDocs" style="grid-column:1/-1; display:none;">
+          <h2 style="margin-top:0;">Документы</h2>
+          <p class="note">Перед заказом можно ознакомиться с документами и правилами обработки данных.</p>
+          <div class="grid" style="grid-template-columns:1fr; gap:10px;">
+            <a class="btn ghost wide" href="privacy.html">Политика конфиденциальности</a>
+            <a class="btn ghost wide" href="consent.html">Согласие на обработку ПД</a>
+            <a class="btn ghost wide" href="terms.html">Пользовательское соглашение</a>
+            <a class="btn ghost wide" href="blog/dokumenty-dlya-peregona-doverennost-sts-pasport-akt.html">Статья: документы для перегона</a>
+          </div>
+          <div class="hr"></div>
+          <p class="note">Если вам нужен акт приёма‑передачи — скажите при оформлении, подготовим шаблон.</p>
+        </div>
+
+        <div class="card" id="panelLoyalty" style="grid-column:1/-1;">
+          <h2 style="margin-top:0;">Накопительная скидка</h2>
+          <table class="table" aria-label="Скидки">
+            <thead><tr><th>Выполненных заказов</th><th>Скидка</th><th>Статус</th></tr></thead>
+            <tbody>
+              <tr><td>0–2</td><td>0%</td><td>Новый клиент</td></tr>
+              <tr><td>3–5</td><td>3%</td><td>Скидка включилась</td></tr>
+              <tr><td>6–9</td><td>5%</td><td>Лояльный</td></tr>
+              <tr><td>10–19</td><td>7%</td><td>Премиум</td></tr>
+              <tr><td>20+</td><td>10%</td><td>Постоянный клиент</td></tr>
+            </tbody>
+          </table>
+          <p class="note" style="margin-top:10px;">Скидка считается по количеству заказов со статусом «выполнено».</p>
+          <div class="hr"></div>
+          <a class="btn ghost wide" href="admin.html" id="adminLink" style="display:none;">Перейти в админку</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</main>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <b style="color:rgba(255,255,255,0.92);">АвтоПерегон PRO</b><br/>
+        <small>Перегон авто · Трезвый водитель · Поддержка 24/7</small>
+      </div>
+      <div>
+        <div><small>Телефон:</small> <a href="tel:+79950202019"><b>+7-995-020-20-19</b></a></div>
+        <div><small>Почта:</small> <a href="mailto:linkert.bz@yandex.ru"><b>linkert.bz@yandex.ru</b></a></div>
+      </div>
+      <div>
+        <small>Документы:</small><br/>
+        <a href="privacy.html">Политика конфиденциальности</a><br/>
+        <a href="consent.html">Согласие на обработку ПД</a><br/>
+        <a href="terms.html">Пользовательское соглашение</a>
+      </div>
+    </div>
+    <div class="hr"></div>
+    <small>© 2026 АвтоПерегон PRO · Россия</small>
+  </div>
+</footer>
+
+<div class="float-contact" id="contactFab" aria-label="Связаться">
+  <button class="fab" id="contactFabBtn" type="button" aria-label="Открыть меню связи">
+    <span class="icon" aria-hidden="true">💬</span>
+    Связаться
+  </button>
+  <div class="menu" id="contactFabMenu" aria-label="Способы связи">
+    <a class="btn ghost wide" href="tel:+79950202019"><span class="icon" aria-hidden="true">📞</span>Позвонить</a>
+    <a class="btn success wide" href="#" data-contact="tg" onclick="return false;"><span class="icon" aria-hidden="true">✈️</span>Telegram</a>
+    <a class="btn ghost wide" href="https://vk.ru/id1060477401" target="_blank" rel="noopener"><span class="icon" aria-hidden="true">VK</span>ВКонтакте</a>
+    <a class="btn ghost wide" href="#" data-contact="max" onclick="return false;"><span class="icon" aria-hidden="true">MAX</span>MAX</a>
+  </div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="assets/js/firebase-config.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+<script src="assets/js/cabinet.js" defer></script>
+<script src="assets/js/platform.js" defer></script>
+<script src="assets/js/main.js" defer></script>
+<!-- Metrika goals (reachGoal) -->
+<script>
+(function () {
+  function reach(goal, params) {
+    try { if (typeof ym === 'function') ym(106551140, 'reachGoal', goal, params || {}); } catch (e) {}
+  }
+  document.addEventListener('DOMContentLoaded', function () {
+    ['leadForm','peregonCalc','loginForm','regForm'].forEach(function (id) {
+      var f = document.getElementById(id);
+      if (!f) return;
+      f.addEventListener('submit', function () { reach('form_submit_' + id); }, true);
+    });
+    document.querySelectorAll('a[href^="tel:"]').forEach(function (a) {
+      a.addEventListener('click', function () { reach('click_tel'); }, true);
+    });
+    document.querySelectorAll('[data-contact="tg"]').forEach(function (a) {
+      a.addEventListener('click', function () { reach('click_tg'); }, true);
+    });
+  });
+})();
+</script>
+<!-- /Metrika goals (reachGoal) -->
+</body>
+</html>
