@@ -12,6 +12,10 @@ Founder of [AVEXIUM](https://avexium.ru). I work on practical web products and a
 | Finansteh | [Financial information platform](cases/finansteh.md) | https://finansteh.ru |
 | Parser | [Structured data service](cases/parser.md) | https://parser.finansteh.ru |
 
+## Independent Python demo
+
+[TaskBoard API — FastAPI, SQLite, REST and tests](python-task-api/README.md). This is an original educational project, not code from any commercial product.
+
 ### Contact
 
 [AVEXIUM](https://avexium.ru) · [GitHub](https://github.com/linkertbz-hash)
